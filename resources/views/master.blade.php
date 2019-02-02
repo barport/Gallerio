@@ -11,7 +11,13 @@
   <!-- Favicon -->
   <link rel="icon" href="lib/template/images/favicon.png">
   <!-- Site Title -->
-  <title>Gallerio - Gellery Shop Template</title>
+
+
+  <title>{{$pageTitle}}</title>
+
+
+
+
   <!-- Bootstrap 4 core CSS -->
   <link href="{{ asset('lib/template/css/bootstrap.min.css') }}" rel="stylesheet">
   <!-- Custom Styles -->
@@ -81,10 +87,10 @@
             <a class="nav-link first-menu-item active" href="{{url('./')}}">Home</a>
           </li>
           <li class="nav-item after-dropdown">
-            <a class="nav-link" href="{{url('about')}}">About Us</a>
+            <a class="nav-link " href="{{url('about')}}">About Us</a>
           </li>
           <li class="nav-item after-dropdown">
-            <a class="nav-link" href="{{url('categories')}}">Categories</a>
+            <a class="nav-link " href="{{url('shop')}}">Shop</a>
           </li>
         </ul><!-- / navbar-nav -->
       </div><!-- / navbar-collapse -->
@@ -99,7 +105,8 @@
           </li>
           <li class="nav-item dropdown extra-dropdowns">
             <a class="nav-link last-menu-item has-dropdown-toggle dropdown-toggle" href="#x" id="dropdown3" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">Shopping Cart<span class="count count-primary">2</span></a>
+              aria-haspopup="true" aria-expanded="false">Shopping Cart<i class="md-icon dp12">shopping_cart</i><span
+                class="count count-primary">2</span></a>
             <div class="dropdown-menu animated fadeIn fast" aria-labelledby="dropdown3">
               <div class="cart-small">
                 <img src="lib/template/images/product-small1.jpg" alt="">
@@ -111,15 +118,15 @@
                 <p><a href="#x" class="text-black">Printed Photography</a> <br> <span>1 x $14.99</span></p>
                 <a href="#x"> <i class="md-icon dp14 close-icon">close</i></a>
               </div><!-- / cart-small -->
-              <p class="text-left cart-small-total"><b>Subtotal: $44.98</b></p>
+              <p class="text-center cart-small-total"><b>Subtotal: $44.98</b></p>
               <div class="cart-small-footer text-center">
                 <div class="row">
                   <div class="col-sm-6">
-                    <a href="shopping-cart.html" class="mini-cart-btn"><i class="md-icon dp12 mr-1">shopping_cart</i>
-                      <span class="va-middle"><b>VIEW CART</b></span></a>
+                    <a href="{{url('cart')}}" class="mini-cart-btn"><i class="md-icon dp12">shopping_cart</i>
+                      <span class="va-middle"><b>CART</b></span></a>
                   </div><!-- / column -->
                   <div class="col-sm-6">
-                    <a href="checkout.html" class="mini-cart-btn mb-0"><i class="md-icon dp12 mr-1">exit_to_app</i>
+                    <a href="{{url('cart')}}" class="mini-cart-btn mb-0"><i class="md-icon dp12 ">exit_to_app</i>
                       <span class="va-middle"><b>CHECKOUT</b></span></a>
                   </div><!-- / column -->
                 </div><!-- / row -->
@@ -351,7 +358,7 @@
               </div><!-- / column -->
 
               <div class="col-md-4 text-right">
-                <a href="shopping-cart.html" class="btn btn-primary m-2">ADD TO CART</a>
+                <a href="{{url('cart')}}" class="btn btn-primary m-2">ADD TO CART</a>
               </div><!-- / column -->
             </div><!-- / row -->
           </div><!-- / container -fluid -->

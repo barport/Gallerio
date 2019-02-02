@@ -2,193 +2,31 @@
 
 @section('main_content')
 
-<section id="gallery" class="p-0 line-effect">
-  <div class="container">
-    <!-- gallery filter -->
-    <ul class="gallery-filter list-inline text-center">
-      <li><a href="#" data-group="all" class="active ml-2">SEE ALL</a></li>
-      <li><a href="#" data-group="framed">FRAMED</a></li>
-      <li><a href="#" data-group="print">PRINT</a></li>
-      <li><a href="#" data-group="digital">DIGITAL</a></li>
-      <li><a href="#" data-group="photography">PHOTOGRAPHY</a></li>
-    </ul>
-    <!-- / gallery filter -->
+<section id="gallery" class="p-0 mt-5 pt-3 line-effect">
+  <div class="container ">
+    <h2 class="title text-center text-regular">CATEGORIES</h2>
   </div><!-- / container -->
   <div class="container full-width">
     <h3 class="section-title hidden">GALLERY</h3>
     <ul class="row gallery line-effect list-unstyled mb-0" id="grid">
       <!-- gallery -->
-      <li class="col-md-6 col-lg-4 gallery" data-groups='["framed"]'>
-        <figure class="gallery-item effect-bubba">
-          <img src="lib/template/images/product.jpg" alt="">
-          <figcaption>
-            <div class="hover-content">
-              <h2 class="hover-title text-center text-white">AMAZING FRAMED ART</h2><!-- / hover-title -->
-              <p class="gallery-info text-center text-white">Framed - From $29.99
-                <span class="gallery-icons">
-                  <a href="#x" class="gallery-button" data-toggle="modal" data-target=".framed-product"><i class="fas fa-plus"></i></a>
-                  <a href="shopping-cart.html" class="gallery-button"><i class="fas fa-shopping-cart"></i></a>
-                </span>
-                <!--/ gallery-icons -->
-              </p><!-- / gallery-info -->
-            </div><!-- / hover-content -->
-          </figcaption>
-        </figure><!-- / gallery-item -->
-      </li><!-- / gallery -->
 
-      <!-- gallery -->
-      <li class="col-md-6 col-lg-4 gallery tall-gallery" data-groups='["photography", "print"]'>
-        <figure class="gallery-item effect-bubba">
-          <img src="lib/template/images/mgallery2.jpg" alt="">
-          <figcaption>
-            <div class="hover-content">
-              <h2 class="hover-title text-center text-white">PRINTED PHOTOGRAPHY</h2><!-- / hover-title -->
-              <p class="gallery-info text-center text-white">Print - From $14.99
-                <span class="gallery-icons">
-                  <a href="#x" class="gallery-button" data-toggle="modal" data-target=".print-product"><i class="fas fa-plus"></i></a>
-                  <a href="shopping-cart.html" class="gallery-button"><i class="fas fa-shopping-cart"></i></a>
-                </span>
-                <!--/ gallery-icons -->
-              </p><!-- / gallery-info -->
-            </div><!-- / hover-content -->
-          </figcaption>
-        </figure><!-- / gallery-item -->
-      </li><!-- / gallery -->
+      @foreach($categories as $categorie):
+      <div class="col-sm-12 col-md-4 mt-4">
+        <div class="card">
+          <img src="{{asset('lib/template/images/'. $categorie['cimage'])}}" alt="" class="card-img-top">
+          <div class="card-body">
+            <h4 class="card-title">{{$categorie['ctitle']}}</h4>
+            <p class="card-text">{{$categorie['carticle']}}</p>
+            <div class="text-center">
 
-      <!-- gallery -->
-      <li class="col-md-6 col-lg-4 gallery" data-groups='["framed"]'>
-        <figure class="gallery-item effect-bubba">
-          <img src="lib/template/images/gallery3.jpg" alt="">
-          <figcaption>
-            <div class="hover-content">
-              <h2 class="hover-title text-center text-white">ROSE GIRL PAINTING</h2><!-- / hover-title -->
-              <p class="gallery-info text-center text-white">Framed - From $99.99
-                <span class="gallery-icons">
-                  <a href="#x" class="gallery-button" data-toggle="modal" data-target=".framed-product"><i class="fas fa-plus"></i></a>
-                  <a href="shopping-cart.html" class="gallery-button"><i class="fas fa-shopping-cart"></i></a>
-                </span>
-                <!--/ gallery-icons -->
-              </p><!-- / gallery-info -->
-            </div><!-- / hover-content -->
-          </figcaption>
-        </figure><!-- / gallery-item -->
-      </li><!-- / gallery -->
+              <a href="{{url('shop/'. $categorie['curl'])}}" class="btn btn-primary pill">View Products</a>
+            </div>
+          </div><!-- / card-body -->
+        </div><!-- / card -->
+      </div><!-- / column -->
 
-      <!-- gallery -->
-      <li class="col-md-6 col-lg-4 gallery" data-groups='["framed"]'>
-        <figure class="gallery-item effect-bubba">
-          <img src="lib/template/images/gallery4.jpg" alt="">
-          <figcaption>
-            <div class="hover-content">
-              <h2 class="hover-title text-center text-white">COLORFULL PAINTING</h2><!-- / hover-title -->
-              <p class="gallery-info text-center text-white">Framed - From $69.99
-                <span class="gallery-icons">
-                  <a href="#x" class="gallery-button" data-toggle="modal" data-target=".framed-product"><i class="fas fa-plus"></i></a>
-                  <a href="shopping-cart.html" class="gallery-button"><i class="fas fa-shopping-cart"></i></a>
-                </span>
-                <!--/ gallery-icons -->
-              </p><!-- / gallery-info -->
-            </div><!-- / hover-content -->
-          </figcaption>
-        </figure><!-- / gallery-item -->
-      </li><!-- / gallery -->
-
-      <!-- gallery -->
-      <li class="col-md-6 col-lg-4 gallery" data-groups='["photography", "print"]'>
-        <figure class="gallery-item effect-bubba">
-          <img src="lib/template/images/gallery5.jpg" alt="">
-          <figcaption>
-            <div class="hover-content">
-              <h2 class="hover-title text-center text-white">GALLERY PHOTGRAPHY</h2><!-- / hover-title -->
-              <p class="gallery-info text-center text-white">Photography, Print - From $4.99
-                <span class="gallery-icons">
-                  <a href="#x" class="gallery-button" data-toggle="modal" data-target=".print-product"><i class="fas fa-plus"></i></a>
-                  <a href="shopping-cart.html" class="gallery-button"><i class="fas fa-shopping-cart"></i></a>
-                </span>
-                <!--/ gallery-icons -->
-              </p><!-- / gallery-info -->
-            </div><!-- / hover-content -->
-          </figcaption>
-        </figure><!-- / gallery-item -->
-      </li><!-- / gallery -->
-
-      <!-- gallery -->
-      <li class="col-md-6 col-lg-4 gallery tall-gallery" data-groups='["photography", "digital"]'>
-        <figure class="gallery-item effect-bubba">
-          <img src="lib/template/images/mgallery6.jpg" alt="">
-          <figcaption>
-            <div class="hover-content">
-              <h2 class="hover-title text-center text-white">SMOKE PHOTGRAPHY</h2><!-- / hover-title -->
-              <p class="gallery-info text-center text-white">Photography, Framed - From $24.49
-                <span class="gallery-icons">
-                  <a href="#x" class="gallery-button" data-toggle="modal" data-target=".framed-product"><i class="fas fa-plus"></i></a>
-                  <a href="shopping-cart.html" class="gallery-button"><i class="fas fa-shopping-cart"></i></a>
-                </span>
-                <!--/ gallery-icons -->
-              </p><!-- / gallery-info -->
-            </div><!-- / hover-content -->
-          </figcaption>
-        </figure><!-- / gallery-item -->
-      </li><!-- / gallery -->
-
-      <!-- gallery -->
-      <li class="col-md-6 col-lg-4 gallery" data-groups='["photography", "digital"]'>
-        <figure class="gallery-item effect-bubba">
-          <img src="lib/template/images/gallery7.jpg" alt="">
-          <figcaption>
-            <div class="hover-content">
-              <h2 class="hover-title text-center text-white">PORTRAITS COLLECTION</h2><!-- / hover-title -->
-              <p class="gallery-info text-center text-white">Photography, Digital - From $9.99
-                <span class="gallery-icons">
-                  <a href="#x" class="gallery-button" data-toggle="modal" data-target=".digital-product"><i class="fas fa-plus"></i></a>
-                  <a href="shopping-cart.html" class="gallery-button"><i class="fas fa-shopping-cart"></i></a>
-                </span>
-                <!--/ gallery-icons -->
-              </p><!-- / gallery-info -->
-            </div><!-- / hover-content -->
-          </figcaption>
-        </figure><!-- / gallery-item -->
-      </li><!-- / gallery -->
-
-      <!-- gallery -->
-      <li class="col-md-6 col-lg-4 gallery" data-groups='["photography", "print", "digital"]'>
-        <figure class="gallery-item effect-bubba">
-          <img src="lib/template/images/gallery8.jpg" alt="">
-          <figcaption>
-            <div class="hover-content">
-              <h2 class="hover-title text-center text-white">COLORFULL FLOWER</h2><!-- / hover-title -->
-              <p class="gallery-info text-center text-white">Photography, Print, Digital - From
-                $23.99
-                <span class="gallery-icons">
-                  <a href="#x" class="gallery-button" data-toggle="modal" data-target=".digital-product"><i class="fas fa-plus"></i></a>
-                  <a href="shopping-cart.html" class="gallery-button"><i class="fas fa-shopping-cart"></i></a>
-                </span>
-                <!--/ gallery-icons -->
-              </p><!-- / gallery-info -->
-            </div><!-- / hover-content -->
-          </figcaption>
-        </figure><!-- / gallery-item -->
-      </li><!-- / gallery -->
-
-      <!-- gallery -->
-      <li class="col-md-6 col-lg-4 gallery" data-groups='["framed"]'>
-        <figure class="gallery-item effect-bubba">
-          <img src="lib/template/images/gallery9.jpg" alt="">
-          <figcaption>
-            <div class="hover-content">
-              <h2 class="hover-title text-center text-white">REFLECTIONS</h2><!-- / hover-title -->
-              <p class="gallery-info text-center text-white">Framed - From $74.99
-                <span class="gallery-icons">
-                  <a href="#x" class="gallery-button" data-toggle="modal" data-target=".framed-product"><i class="fas fa-plus"></i></a>
-                  <a href="shopping-cart.html" class="gallery-button"><i class="fas fa-shopping-cart"></i></a>
-                </span>
-                <!--/ gallery-icons -->
-              </p><!-- / gallery-info -->
-            </div><!-- / hover-content -->
-          </figcaption>
-        </figure><!-- / gallery-item -->
-      </li><!-- / gallery -->
-
+      @endforeach
     </ul><!-- / gallery -->
   </div><!-- / container -->
 </section>
@@ -196,28 +34,5 @@
 
 <div class="spacer-2x">&nbsp;</div>
 
-<section id="clients" class="bg-white">
-  <h4 class="text-center">HAPPY CLIENTS</h4>
-  <div class="spacer spacer-line border-primary">&nbsp;</div>
-  <div class="spacer">&nbsp;</div>
-  <div class="container">
-    <div id="clients-carousel" class="owl-carousel owl-theme">
-      <img src="lib/template/images/client1.png" alt="">
-      <img src="lib/template/images/client2.png" alt="">
-      <img src="lib/template/images/client3.png" alt="">
-      <img src="lib/template/images/client4.png" alt="">
-      <img src="lib/template/images/client5.png" alt="">
-      <img src="lib/template/images/client6.png" alt="">
-      <img src="lib/template/images/client1.png" alt="">
-      <img src="lib/template/images/client2.png" alt="">
-      <img src="lib/template/images/client3.png" alt="">
-      <img src="lib/template/images/client4.png" alt="">
-      <img src="lib/template/images/client5.png" alt="">
-      <img src="lib/template/images/client6.png" alt="">
-    </div><!-- / owl-carousel -->
-    <!-- / clients carousel -->
-
-  </div><!-- / container -->
-</section><!-- / clients -->
 
 @endsection
