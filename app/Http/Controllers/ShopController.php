@@ -20,4 +20,16 @@ class ShopController extends MainController
         Product::getProducts($curl, self::$data);
         return view('content.products', self::$data);
     }
+
+    public function item($curl, $purl)
+    {
+        Product::getItem($purl, self::$data);
+
+        return view('content.item', self::$data);
+
+    }
+    public function addToCart()
+    {
+        echo $_GET['pid'];
+    }
 }

@@ -22,13 +22,19 @@
   <link href="{{ asset('lib/template/css/bootstrap.min.css') }}" rel="stylesheet">
   <!-- Custom Styles -->
   <link href="{{ asset('lib/template/css/style.css') }}" rel="stylesheet">
+  <link href="{{ asset('lib/template/css/products.css') }}" rel="stylesheet">
   <link href="{{ asset('lib/template/css/animate.css')}}" rel="stylesheet">
   <link href="{{ asset('lib/template/css/owl.carousel.min.css')}}" rel="stylesheet">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="lib/template/css/fontawesome-all.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+    crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:700" rel="stylesheet">
+  <script>
+    var BASE_URL = "{{url('')}}";
+  </script>
 </head>
 
 <body>
@@ -104,9 +110,19 @@
             <a class="nav-link before-count" href="{{url('contact')}}">Contact</a>
           </li>
           <li class="nav-item dropdown extra-dropdowns">
-            <a class="nav-link last-menu-item has-dropdown-toggle dropdown-toggle" href="#x" id="dropdown3" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">Shopping Cart<i class="md-icon dp12">shopping_cart</i><span
-                class="count count-primary">2</span></a>
+            <a class="nav-link last-menu-item has-dropdown-toggle dropdown-toggle " href="#x" data-toggle="dropdown"
+              aria-expanded="false">
+              <span class="text-primary">
+                <i class="fas fa-shopping-cart"></i> </span>Shopping Cart
+              @if(!Cart::isEmpty())
+              <span class="count count-primary">
+                {{Cart::getTotalQuantity()}}
+              </span>
+              @endif
+            </a>
+
+
+
             <div class="dropdown-menu animated fadeIn fast" aria-labelledby="dropdown3">
               <div class="cart-small">
                 <img src="lib/template/images/product-small1.jpg" alt="">
@@ -555,6 +571,7 @@
   <!-- gallery Script -->
   <script src="{{asset('lib/template/js/jquery.shuffle.min.js')}}"></script>
   <script src="{{asset('lib/template/js/gallery.js')}}"></script>
+  <script src="{{asset('lib/template/js/app.js')}}"></script>
   <script>
     $(document).ready(function () {
       if (Modernizr.touch) {

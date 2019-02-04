@@ -3,11 +3,20 @@
 @section('main_content')
 
 <section id="gallery" class="p-0 mt-5 pt-3 line-effect">
-  <div class="container ">
-    <h2 class="title text-center text-regular">CATEGORIES</h2>
-  </div><!-- / container -->
+
   <div class="container full-width">
-    <h3 class="section-title hidden">GALLERY</h3>
+    <div class="foo">
+      <span class="letter" data-letter="C">C</span>
+      <span class="letter" data-letter="A">A</span>
+      <span class="letter" data-letter="T">T</span>
+      <span class="letter" data-letter="E">E</span>
+      <span class="letter" data-letter="G">G</span>
+      <span class="letter" data-letter="O">O</span>
+      <span class="letter" data-letter="R">R</span>
+      <span class="letter" data-letter="I">I</span>
+      <span class="letter" data-letter="E">E</span>
+      <span class="letter" data-letter="S">S</span>
+    </div>
     <ul class="row gallery line-effect list-unstyled mb-0" id="grid">
       <!-- gallery -->
 
@@ -17,9 +26,9 @@
           <img src="{{asset('lib/template/images/'. $categorie['cimage'])}}" alt="" class="card-img-top">
           <div class="card-body">
             <h4 class="card-title">{{$categorie['ctitle']}}</h4>
-            <p class="card-text">{{$categorie['carticle']}}</p>
+            <p class="card-text">{!!$categorie['carticle']!!}</p>
             <div class="text-center">
-
+              <br><br>
               <a href="{{url('shop/'. $categorie['curl'])}}" class="btn btn-primary pill">View Products</a>
             </div>
           </div><!-- / card-body -->

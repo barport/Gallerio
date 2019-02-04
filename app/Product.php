@@ -11,6 +11,7 @@ class Product extends Model
     {
         $products = DB::table('products AS p')
             ->join('categories AS c', 'c.id', '=', 'p.categorie_id')
+            ->select('c.ctitle', 'c.curl', 'p.*')
             ->where('c.curl', '=', $curl)
             ->get()
             ->toArray();
@@ -22,6 +23,19 @@ class Product extends Model
         } else {
             $data['pageTitle'] .= $products[0]->ctitle;
             $data['products'] = $products;
+        }
+    }
+
+    public static function getItem($purl, &$data)
+    {
+        if ($item = Product::where('purl', '=', $purl)->first()) {
+            $item = $item->toArray();
+            $data['pageTitle'] .= $item['ptitle'];
+            $data['product'] = $item;
+
+        } else {
+
+            abort(404);
         }
     }
 }
