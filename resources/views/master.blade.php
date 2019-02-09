@@ -28,12 +28,12 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="lib/template/css/fontawesome-all.min.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:700" rel="stylesheet">
   <script>
-    var BASE_URL = "{{url('')}}";
+    var BASE_URL = "{{url('')}}/";
   </script>
 </head>
 
@@ -58,9 +58,19 @@
           <a href="#"><i class="fab fa-pinterest"></i></a>
         </span>
         <span class="right">
-          <a href="#x" data-toggle="modal" data-target=".login-modal"><i class="fas fa-user mr-1"></i> <span>Login</span></a>
-          <a href="#x" data-toggle="modal" data-target=".register-modal"><i class="fas fa-lock mr-1"></i>
+          @if(! Session::has('user_id'))
+          <a href="{{url('user/signin')}}"><i class="fas fa-user mr-1"></i>
+            <span>Login</span></a>
+          <a href="{{url('user/signup')}}"><i class="fas fa-lock mr-1"></i>
             <span>Register</span></a>
+
+          @else
+          <a href="url('user/profile')">{{Session::get('user_name')}}</a>
+          @if(Session::has('is_admin'))
+          <a href="{{url('cms/dashboard')}}">Admin Panel</a>
+          @endif
+          <a href="{{url('user/logout')}}">Logout</a>
+          @endif
         </span>
       </p>
     </div><!-- / container -->
@@ -110,54 +120,66 @@
             <a class="nav-link before-count" href="{{url('contact')}}">Contact</a>
           </li>
           <li class="nav-item dropdown extra-dropdowns">
-            <a class="nav-link last-menu-item has-dropdown-toggle dropdown-toggle " href="#x" data-toggle="dropdown"
-              aria-expanded="false">
-              <span class="text-primary">
-                <i class="fas fa-shopping-cart"></i> </span>Shopping Cart
-              @if(!Cart::isEmpty())
+            <a class="nav-link last-menu-item has-dropdown-toggle dropdown-toggle" href="{{url('checkout')}}"
+              id="dropdown3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                class="fas fa-shopping-cart"></i>
+              Shopping Cart
               <span class="count count-primary">
-                {{Cart::getTotalQuantity()}}
-              </span>
-              @endif
-            </a>
+                {{Cart::getTotalQuantity()}}</span></a>
 
-
+            @if(Cart::getTotalQuantity() > 0)
+            @foreach(Cart::getContent()->toArray() as $item)
 
             <div class="dropdown-menu animated fadeIn fast" aria-labelledby="dropdown3">
               <div class="cart-small">
                 <img src="lib/template/images/product-small1.jpg" alt="">
-                <p><a href="#x" class="text-black">Amazing Framed Art</a> <br> <span>1 x $29.99</span></p>
+                <p><a href="#x" class="text-black">{{$item['name']}}</a> <br> <span>{{$item['price']}}</span></p>
                 <a href="#x"> <i class="md-icon dp14 close-icon">close</i></a>
               </div><!-- / cart-small -->
-              <div class="cart-small">
-                <img src="lib/template/images/product-small2.jpg" alt="">
-                <p><a href="#x" class="text-black">Printed Photography</a> <br> <span>1 x $14.99</span></p>
-                <a href="#x"> <i class="md-icon dp14 close-icon">close</i></a>
-              </div><!-- / cart-small -->
-              <p class="text-center cart-small-total"><b>Subtotal: $44.98</b></p>
+
+              <p class="text-center cart-small-total"><b>SubTotal : ${{Cart::getTotal()}}</b></p>
               <div class="cart-small-footer text-center">
                 <div class="row">
                   <div class="col-sm-6">
-                    <a href="{{url('cart')}}" class="mini-cart-btn"><i class="md-icon dp12">shopping_cart</i>
+                    <a href="{{url('shop/cart')}}" class="mini-cart-btn"><i class="md-icon dp12">shopping_cart</i>
                       <span class="va-middle"><b>CART</b></span></a>
                   </div><!-- / column -->
                   <div class="col-sm-6">
-                    <a href="{{url('cart')}}" class="mini-cart-btn mb-0"><i class="md-icon dp12 ">exit_to_app</i>
+                    <a href="{{url('shop/checkout')}}" class="mini-cart-btn mb-0"><i
+                        class="md-icon dp12 ">exit_to_app</i>
                       <span class="va-middle"><b>CHECKOUT</b></span></a>
                   </div><!-- / column -->
                 </div><!-- / row -->
               </div><!-- / cart-small-footer -->
             </div><!-- / dropdown-menu -->
+            @endforeach
+            @endif
           </li><!-- / dropdown -->
         </ul><!-- / navbar-nav -->
       </div><!-- / navbar-collapse -->
     </div><!-- / container -->
   </nav><!-- / split-navbar -->
-
   <!--  End Header   -->
 
+  <main class="my-5">
+    @if($errors->any())
+    <div class="container">
+      <div class="row">
+        <div class="col-8  m-auto">
+          <div class="alert alert-danger rounded">
+            <ul>
+              @foreach($errors->all() as $error)
+              <li class="text-white">{{$error}}</li>
+              @endforeach
+            </ul>
+          </div>
 
-  @yield('main_content')
+        </div>
+      </div>
+    </div>
+    @endif
+    @yield('main_content')
+  </main>
 
 
   <!-- Start Footer !!! -->
@@ -219,347 +241,11 @@
 
   <!-- modals -->
 
-  <!-- login-modal -->
-  <div class="modal fade login-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">LOG IN</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div><!-- / modal-header -->
-        <div class="modal-body">
-          <div class="custom-form">
-            <div class="form-wrapper">
-              <input type="text" class="form-control mb-3" id="login-input" placeholder="Username or Email">
-              <input type="password" class="form-control mb-3" id="login-password-input" placeholder="Password">
-              <div class="form-inline-extras">
-                <div class="left-area">
-                  <div class="checkbox checkbox-primary ml-2">
-                    <label class="hidden"><input type="checkbox"></label>
-                    <input id="checkbox5" type="checkbox">
-                    <label for="checkbox5">
-                      Remember Me
-                    </label>
-                  </div><!-- / checkbox -->
-                </div><!-- / left-area -->
-                <div class="right-area">
-                  <a href="my-account.html" class="btn btn-primary rectangle">LOG IN</a>
-                </div><!-- / right-area -->
-              </div><!-- / form-inline-extras -->
-              <div class="text-left mt-2">
-                <a href="#x">Forgot your password?</a>
-              </div><!-- / text-left -->
-            </div><!-- / form-wrapper -->
-          </div><!-- / custom-form -->
-        </div><!-- / modal-body -->
-      </div><!-- / modal-content -->
-    </div><!-- / modal-dialog -->
-  </div><!-- / modal -->
-  <!-- / login-modal -->
-
-  <!-- register-modal -->
-  <div class="modal fade register-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">REGISTER</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div><!-- / modal-header -->
-        <div class="modal-body">
-          <div class="custom-form">
-            <div class="form-wrapper">
-              <input type="email" class="form-control mb-3" id="register-email" placeholder="Email Address">
-              <input type="text" class="form-control mb-3" id="register-username" placeholder="Username">
-              <input type="password" class="form-control mb-3" id="register-password-input" placeholder="Password">
-              <input type="password" class="form-control mb-3" id="register-confirm-password" placeholder="Confirm Password">
-              <div class="form-inline-extras sixty-fourty">
-                <div class="left-area">
-                  <div class="checkbox checkbox-primary ml-1">
-                    <label class="hidden"><input type="checkbox"></label>
-                    <input id="checkbox6" type="checkbox">
-                    <label for="checkbox6">
-                      I Accept <a href="#x">Terms &amp; Conditions</a>
-                    </label>
-                  </div><!-- / checkbox -->
-                </div><!-- / left-area -->
-                <div class="right-area">
-                  <a href="#x" class="btn btn-primary rectangle">REGISTER</a>
-                </div><!-- / right-area -->
-              </div><!-- / form-inline-extras -->
-            </div><!-- / form-wrapper -->
-          </div><!-- / custom-form -->
-        </div><!-- / modal-body -->
-      </div><!-- / modal-content -->
-    </div><!-- / modal-dialog -->
-  </div><!-- / modal -->
-  <!-- / register-modal -->
-
-  <!-- product-modal -->
-  <div class="modal fade product-modal framed-product" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div><!-- / modal-header -->
-        <div class="modal-body">
-          <div class="container-fluid">
-            <div class="row vcenter">
-              <div class="col-md-6">
-                <div id="product-slider" class="owl-carousel owl-theme carousel-full-nav">
-
-                  <div class="slide one framed-product">
-                  </div><!-- / slide-one -->
-
-                  <div class="slide two framed-product">
-                  </div><!-- / slide-two -->
-
-                  <div class="slide three framed-product">
-                  </div><!-- / slide-three -->
-
-                </div><!-- / owl-carousel -->
-              </div><!-- / column -->
-              <div class="col-md-6">
-                <h4 class="single-product-title">AMAZING FRAMED ART</h4>
-                <h6 class="text-primary">FRAMED</h6>
-                <p>Aliquam ut lacus iaculis, scelerisque libero sit amet, ultricies dolor. Proin
-                  facilisis volutpat leo quis scelerisque. Fusce porttitor semper dolor, vel pulvinar
-                  est ultricies in. Suspendisse at mi sed diam facilisis accumsan. Etiam convallis
-                  viverra augue, eget scelerisque risus molestie</p>
-                <div class="product-info pb-3 pt-3">
-
-                  <p class="mb-3"><i class="far fa-bookmark text-muted mr-1"></i> Price: <span class="text-black"><b>$29.99</b>
-                      - <b>$79.99</b></span></p>
-
-                  <p class="mb-3"><i class="far fa-folder-open text-muted mr-1"></i> Category: <a href="#x" class="text-black"><b>Framed</b></a></p>
-
-                  <p class="mb-3"><i class="far fa-smile text-muted mr-1"></i> Rating: <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i></p>
-
-                  <p class="mb-0 pt-1"><b>Select Quantity & Size:</b></p>
-
-                  <form class="form-inline">
-                    <input class="form-control qty m-2" type="number" value="1" id="number-input">
-
-                    <select class="form-control selector shop-option m-2" id="inline-form-select-1">
-                      <option value="1">S</option>
-                      <option value="2">M</option>
-                      <option value="3">L</option>
-                      <option value="4">XL</option>
-                    </select>
-                  </form>
-                </div><!-- / product-info -->
-              </div><!-- / column -->
-            </div><!-- / row -->
-          </div><!-- / container-fluid -->
-        </div><!-- / modal-body -->
-        <div class="modal-footer">
-          <div class="container-fluid">
-            <div class="row vcenter">
-              <div class="col-md-4">
-                <p class="mb-0 text-white creator-info"><img src="lib/template/images/creator.jpg" class="creator-image"
-                    alt="">
-                  <span><b>JOHN DOE</b></span> <span class="text-sm">Photographer &
-                    Painter</span></p>
-              </div><!-- / column -->
-
-              <div class="col-md-4">
-                <h3 class="text-center text-white mb-0 final-price">$29.99</h3>
-              </div><!-- / column -->
-
-              <div class="col-md-4 text-right">
-                <a href="{{url('cart')}}" class="btn btn-primary m-2">ADD TO CART</a>
-              </div><!-- / column -->
-            </div><!-- / row -->
-          </div><!-- / container -fluid -->
-        </div><!-- / modal-footer -->
-      </div><!-- / modal-content -->
-    </div><!-- / modal-dialog -->
-  </div><!-- / modal -->
-  <!-- / product-modal -->
-
-  <!-- product-modal -->
-  <div class="modal fade product-modal print-product" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div><!-- / modal-header -->
-        <div class="modal-body">
-          <div class="container-fluid">
-            <div class="row vcenter">
-              <div class="col-md-6">
-                <div id="product-slider-2" class="owl-carousel owl-theme carousel-full-nav">
-
-                  <div class="slide four framed-product">
-                  </div><!-- / slide-one -->
-
-                  <div class="slide five framed-product">
-                  </div><!-- / slide-two -->
-
-                  <div class="slide six framed-product">
-                  </div><!-- / slide-three -->
-
-                </div><!-- / owl-carousel -->
-              </div><!-- / column -->
-              <div class="col-md-6">
-                <h4 class="single-product-title">PRINTED PHOTOGRAPHY</h4>
-                <h6 class="text-primary">PRINT</h6>
-                <p>Aliquam ut lacus iaculis, scelerisque libero sit amet, ultricies dolor. Proin
-                  facilisis volutpat leo quis scelerisque. Fusce porttitor semper dolor, vel pulvinar
-                  est ultricies in. Suspendisse at mi sed diam facilisis accumsan. Etiam convallis
-                  viverra augue, eget scelerisque risus molestie</p>
-                <div class="product-info pb-3 pt-3">
-
-                  <p class="mb-3"><i class="far fa-bookmark text-muted mr-1"></i> Price: <span class="text-black"><b>$14.99</b>
-                      - <b>$44.99</b></span></p>
-
-                  <p class="mb-3"><i class="far fa-folder-open text-muted mr-1"></i> Category: <a href="#x" class="text-black"><b>Print</b></a></p>
-
-                  <p class="mb-3"><i class="far fa-smile text-muted mr-1"></i> Rating: <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i></p>
-
-                  <p class="mb-0 pt-1"><b>Select Quantity & Size:</b></p>
-
-                  <form class="form-inline">
-                    <input class="form-control qty m-2" type="number" value="1" id="number-input-3">
-
-                    <select class="form-control selector shop-option m-2" id="inline-form-select-2">
-                      <option value="1">S</option>
-                      <option value="2">M</option>
-                      <option value="3">L</option>
-                      <option value="4">XL</option>
-                    </select>
-                  </form>
-                </div><!-- / product-info -->
-              </div><!-- / column -->
-            </div><!-- / row -->
-          </div><!-- / container-fluid -->
-        </div><!-- / modal-body -->
-        <div class="modal-footer">
-          <div class="container-fluid">
-            <div class="row vcenter">
-              <div class="col-md-4">
-                <p class="mb-0 text-white creator-info"><img src="lib/template/images/creator2.jpg" class="creator-image"
-                    alt="">
-                  <span><b>LUCY DOE</b></span> <span class="text-sm">Photographer &
-                    Editor</span></p>
-              </div><!-- / column -->
-
-              <div class="col-md-4">
-                <h3 class="text-center text-white mb-0 final-price">$14.99</h3>
-              </div><!-- / column -->
-
-              <div class="col-md-4 text-right">
-                <a href="shopping-cart.html" class="btn btn-primary m-2">ADD TO CART</a>
-              </div><!-- / column -->
-            </div><!-- / row -->
-          </div><!-- / container -fluid -->
-        </div><!-- / modal-footer -->
-      </div><!-- / modal-content -->
-    </div><!-- / modal-dialog -->
-  </div><!-- / modal -->
-  <!-- / product-modal -->
-
-  <!-- product-modal -->
-  <div class="modal fade product-modal digital-product" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div><!-- / modal-header -->
-        <div class="modal-body">
-          <div class="container-fluid">
-            <div class="row vcenter">
-              <div class="col-md-6">
-                <div id="product-slider-3" class="owl-carousel owl-theme carousel-full-nav">
-
-                  <div class="slide seven framed-product">
-                  </div><!-- / slide-one -->
-
-                  <div class="slide eight framed-product">
-                  </div><!-- / slide-two -->
-
-                  <div class="slide nine framed-product">
-                  </div><!-- / slide-three -->
-
-                </div><!-- / owl-carousel -->
-              </div><!-- / column -->
-              <div class="col-md-6">
-                <h4 class="single-product-title">PORTRAITS COLLECTION</h4>
-                <h6 class="text-primary">DIGITAL</h6>
-                <p>Aliquam ut lacus iaculis, scelerisque libero sit amet, ultricies dolor. Proin
-                  facilisis volutpat leo quis scelerisque. Fusce porttitor semper dolor, vel pulvinar
-                  est ultricies in. Suspendisse at mi sed diam facilisis accumsan. Etiam convallis
-                  viverra augue, eget scelerisque risus molestie</p>
-                <div class="product-info pb-3 pt-3">
-
-                  <p class="mb-3"><i class="far fa-bookmark text-muted mr-1"></i> Price: <span class="text-black"><b>$9.99</b>
-                      - <b>$26.99</b></span></p>
-
-                  <p class="mb-3"><i class="far fa-folder-open text-muted mr-1"></i> Category: <a href="#x" class="text-black"><b>Digital</b></a></p>
-
-                  <p class="mb-3"><i class="far fa-smile text-muted mr-1"></i> Rating: <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i></p>
-
-                  <p class="mb-0 pt-1"><b>Select Quantity & Size:</b></p>
-
-                  <form class="form-inline">
-                    <input class="form-control qty m-2" type="number" value="1" id="number-input-2">
-
-                    <select class="form-control selector shop-option m-2" id="inline-form-select-3">
-                      <option value="1">S</option>
-                      <option value="2">M</option>
-                      <option value="3">L</option>
-                      <option value="4">XL</option>
-                    </select>
-                  </form>
-                </div><!-- / product-info -->
-              </div><!-- / column -->
-            </div><!-- / row -->
-          </div><!-- / container-fluid -->
-        </div><!-- / modal-body -->
-        <div class="modal-footer">
-          <div class="container-fluid">
-            <div class="row vcenter">
-              <div class="col-md-4">
-                <p class="mb-0 text-white creator-info"><img src="lib/template/images/creator3.jpg" class="creator-image"
-                    alt="">
-                  <span><b>JOHANA DOE</b></span> <span class="text-sm">Photographer</span></p>
-              </div><!-- / column -->
-
-              <div class="col-md-4">
-                <h3 class="text-center text-white mb-0 final-price">$9.99</h3>
-              </div><!-- / column -->
-
-              <div class="col-md-4 text-right">
-                <a href="shopping-cart.html" class="btn btn-primary m-2">ADD TO CART</a>
-              </div><!-- / column -->
-            </div><!-- / row -->
-          </div><!-- / container -fluid -->
-        </div><!-- / modal-footer -->
-      </div><!-- / modal-content -->
-    </div><!-- / modal-dialog -->
-  </div><!-- / modal -->
-  <!-- / product-modal -->
-
-  <!-- / modals -->
 
   <!-- Core JavaScript -->
   <script src="{{asset('lib/template/js/jquery.min.js')}}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+    integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
     crossorigin="anonymous"></script>
   <script src="{{asset('lib/template/js/bootstrap.min.js')}}"></script>
   <!-- / Core JavaScript -->
@@ -568,107 +254,30 @@
   <script src="{{asset('lib/template/js/preloader.js')}}"></script>
   <!-- / preloader -->
 
+
+
+  <!-- toaster-->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+  <!-- /toaster-->
   <!-- gallery Script -->
   <script src="{{asset('lib/template/js/jquery.shuffle.min.js')}}"></script>
   <script src="{{asset('lib/template/js/gallery.js')}}"></script>
   <script src="{{asset('lib/template/js/app.js')}}"></script>
+  @if(Session::has('sm'))
   <script>
-    $(document).ready(function () {
-      if (Modernizr.touch) {
-        // show the close overlay button
-        $(".close-overlay").removeClass("hidden");
-        // handle the adding of hover class when clicked
-        $(".img").click(function (e) {
-          if (!$(this).hasClass("hover")) {
-            $(this).addClass("hover");
-          }
-        });
-        // handle the closing of the overlay
-        $(".close-overlay").click(function (e) {
-          e.preventDefault();
-          e.stopPropagation();
-          if ($(this).closest(".img").hasClass("hover")) {
-            $(this).closest(".img").removeClass("hover");
-          }
-        });
-      } else {
-        // handle the mouseenter functionality
-        $(".img").mouseenter(function () {
-          $(this).addClass("hover");
-        })
-          // handle the mouseleave functionality
-          .mouseleave(function () {
-            $(this).removeClass("hover");
-          });
-      }
-    });
+    @if (Session:: has('toastrpos'))
+    toastr.options.positionClass = "{{Session::get('toastrpos')}}";
+    @else
+    toastr.options.positionClass = "toast-bottom-center";
+    @endif
+    toastr.success("{{Session::get('sm')}}");
   </script>
-  <!-- / gallery Script -->
+  @endif
 
-  <!-- Owl Carousel -->
-  <script src="{{asset('lib/template/js/owl.carousel.min.js')}}"></script>
-  <script>
-    $('#product-slider').owlCarousel({
-      loop: false,
-      margin: 10,
-      smartSpeed: 1000,
-      nav: true,
-      dots: true,
-      navText: ["<i class='fas fa-long-arrow-alt-left'></i>", "<i class='fas fa-long-arrow-alt-right'></i>"],
-      items: 1,
-      animateIn: 'fadeIn',
-      animateOut: 'fadeOut'
-    })
-  </script>
 
-  <script>
-    $('#product-slider-2').owlCarousel({
-      loop: false,
-      margin: 10,
-      smartSpeed: 1000,
-      nav: true,
-      dots: true,
-      navText: ["<i class='fas fa-long-arrow-alt-left'></i>", "<i class='fas fa-long-arrow-alt-right'></i>"],
-      items: 1,
-      animateIn: 'fadeIn',
-      animateOut: 'fadeOut'
-    })
-  </script>
-
-  <script>
-    $('#product-slider-3').owlCarousel({
-      loop: false,
-      margin: 10,
-      smartSpeed: 1000,
-      nav: true,
-      dots: true,
-      navText: ["<i class='fas fa-long-arrow-alt-left'></i>", "<i class='fas fa-long-arrow-alt-right'></i>"],
-      items: 1,
-      animateIn: 'fadeIn',
-      animateOut: 'fadeOut'
-    })
-  </script>
-
-  <script>
-    $('#clients-carousel').owlCarousel({
-      loop: true,
-      margin: 100,
-      dots: false,
-      autoplay: false,
-      responsive: {
-        0: {
-          items: 1
-        },
-        600: {
-          items: 3
-        },
-        1000: {
-          items: 4
-        }
-      }
-    })
-  </script>
-  <!-- / Owl Carousel -->
 
 </body>
 

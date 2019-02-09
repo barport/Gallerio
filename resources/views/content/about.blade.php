@@ -166,29 +166,6 @@
   </div><!-- / container -->
 </section><!-- / team -->
 
-<section id="clients">
-  <h4 class="text-center">HAPPY CLIENTS</h4>
-  <div class="spacer spacer-line border-primary">&nbsp;</div>
-  <div class="spacer">&nbsp;</div>
-  <div class="container">
-    <div id="clients-carousel" class="owl-carousel owl-theme">
-      <img src="images/client1.png" alt="">
-      <img src="images/client2.png" alt="">
-      <img src="images/client3.png" alt="">
-      <img src="images/client4.png" alt="">
-      <img src="images/client5.png" alt="">
-      <img src="images/client6.png" alt="">
-      <img src="images/client1.png" alt="">
-      <img src="images/client2.png" alt="">
-      <img src="images/client3.png" alt="">
-      <img src="images/client4.png" alt="">
-      <img src="images/client5.png" alt="">
-      <img src="images/client6.png" alt="">
-    </div><!-- / owl-carousel -->
-    <!-- / clients carousel -->
-
-  </div><!-- / container -->
-</section><!-- / clients -->
 
 <div class="container">
   <div id="testimonials" class="dark parallax">

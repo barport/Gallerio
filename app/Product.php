@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Cart;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +12,7 @@ class Product extends Model
     {
         $products = DB::table('products AS p')
             ->join('categories AS c', 'c.id', '=', 'p.categorie_id')
-            ->select('c.ctitle', 'c.curl', 'p.*')
+            ->select('c.ctitle', 'c.curl', 'p.*', 'p.pimage')
             ->where('c.curl', '=', $curl)
             ->get()
             ->toArray();
@@ -36,6 +37,39 @@ class Product extends Model
         } else {
 
             abort(404);
+        }
+    }
+
+    public static function addToCart($pid)
+    {
+        if ($product = Product::find($pid)) {
+
+            $product = $product->toArray();
+
+            if (!Cart::get($pid)) {
+
+                Cart::add($pid, $product['ptitle'], $product['price'], 1, []);
+            }
+        }
+
+    }
+
+    public static function updateCart($request)
+    {
+
+        if (!empty($request['pid']) && !empty($request['op'])) {
+
+            if (is_numeric($request['pid'])) {
+
+                if ($request['op'] == 'plus') {
+
+                    Cart::update($request['pid'], ['quantity' => 1]);
+
+                } else if ($request['op'] == 'minus') {
+
+                    Cart::update($request['pid'], ['quantity' => -1]);
+                }
+            }
         }
     }
 }

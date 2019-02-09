@@ -6,8 +6,11 @@ $('.add-to-cart-btn').on('click', function () {
     type: 'GET',
     dataType: 'html',
     data: { pid: $(this).data('id') },
-    success: function (res) { }
+    success: function (res) {
 
+      window.location.reload();
+
+    }
 
   });
 });

@@ -2,41 +2,35 @@
 
 @section('main_content')
 
-<section id="gallery" class="p-0 mt-5 pt-3 line-effect">
+<section id="gallery" class="">
 
-  <div class="container full-width">
-    <div class="foo">
-      <span class="letter" data-letter="C">C</span>
-      <span class="letter" data-letter="A">A</span>
-      <span class="letter" data-letter="T">T</span>
-      <span class="letter" data-letter="E">E</span>
-      <span class="letter" data-letter="G">G</span>
-      <span class="letter" data-letter="O">O</span>
-      <span class="letter" data-letter="R">R</span>
-      <span class="letter" data-letter="I">I</span>
-      <span class="letter" data-letter="E">E</span>
-      <span class="letter" data-letter="S">S</span>
-    </div>
-    <ul class="row gallery line-effect list-unstyled mb-0" id="grid">
-      <!-- gallery -->
+  <div class="container">
+    <header class="shop-header parallax">
+      <div class="header-content dark text-center">
+        <h1 class="header-title text-white  mb-0">CATEGORIES </h1>
+        <p class="inner-space mb-0 text-white">Clean & Elegant Gallery Shop</p>
+      </div><!-- / header-content -->
+    </header>
+  </div><!-- / container -->
 
-      @foreach($categories as $categorie):
-      <div class="col-sm-12 col-md-4 mt-4">
-        <div class="card">
-          <img src="{{asset('lib/template/images/'. $categorie['cimage'])}}" alt="" class="card-img-top">
-          <div class="card-body">
-            <h4 class="card-title">{{$categorie['ctitle']}}</h4>
-            <p class="card-text">{!!$categorie['carticle']!!}</p>
-            <div class="text-center">
-              <br><br>
-              <a href="{{url('shop/'. $categorie['curl'])}}" class="btn btn-primary pill">View Products</a>
-            </div>
-          </div><!-- / card-body -->
-        </div><!-- / card -->
-      </div><!-- / column -->
 
-      @endforeach
-    </ul><!-- / gallery -->
+  <div class="container full-width text-center">
+
+    <!-- gallery -->
+
+    @foreach($categories as $categorie):
+    <div class="card col-md-4">
+      <img src="{{asset('lib/template/images/'. $categorie['cimage'])}}" alt="" class="card-img-top">
+      <div class="card-body">
+        <h4 class="card-title">{{$categorie['ctitle']}}</h4>
+        <p class="card-text">{!!$categorie['carticle']!!}</p>
+        <div class="text-center">
+          <br><br>
+          <a href="{{url('shop/'. $categorie['curl'])}}" class="btn btn-primary pill">View Products</a>
+        </div>
+      </div><!-- / card-body -->
+    </div><!-- / card -->
+    @endforeach
   </div><!-- / container -->
 </section>
 <!-- / gallery -->

@@ -5,8 +5,8 @@
 <div class="container">
   <header class="contact-header parallax">
     <div class="header-content dark text-center">
-      <h1 class="header-title mb-0">CONTACT</h1>
-      <p class="inner-space mb-0">Get in touch with Us!</p>
+      <h1 class="header-title mb-0 text-dark">CONTACT</h1>
+      <p class="inner-space mb-0 text-dark">Get in touch with Us!</p>
     </div><!-- / header-content -->
   </header>
 </div><!-- / container -->
@@ -29,15 +29,14 @@
           <i class="fas fa-map-marked-alt contact-icon mb-3"></i>
           <h5 class="box-title">LOCATION</h5>
           <p class="box-description">Miami, Florida</p>
-          <p class="box-description mb-0">27 King Street, Nr. 33</p>
+          <p class="box-description mb-0">5 Shoham Street, Ramat-Gan</p>
         </div><!-- / contact-box -->
       </div><!-- / column -->
       <div class="col-md-4">
         <div class="contact-box inner-space text-center">
           <i class="far fa-envelope contact-icon mb-3"></i>
           <h5 class="box-title">EMAIL</h5>
-          <p class="box-description"><a href="mailto:office@website.com">office@yoursite.com</a></p>
-          <p class="box-description mb-0"><a href="mailto:info@website.com">info@yoursite.com</a></p>
+          <p class="box-description"><a href="mailto:bartillerr@gmail.com">bartillerr@gmail.com</a></p>
         </div><!-- / contact-box -->
       </div><!-- / column -->
     </div><!-- / row -->
@@ -82,7 +81,8 @@
       </div><!-- / row -->
 
       <div class="text-center">
-        <button type="submit" id="form-submit" class="btn btn-submit btn-primary rectangle"><span>SEND MESSAGE</span></button>
+        <button type="submit" id="form-submit" class="btn btn-submit btn-primary rectangle"><span>SEND
+            MESSAGE</span></button>
         <div id="msgSubmit" class="h3 text-center hidden"></div>
         <div class="clearfix"></div>
       </div><!-- / text-center -->

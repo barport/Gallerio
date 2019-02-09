@@ -13,8 +13,12 @@
         <p class="text-monospace">{!!$product['particle']!!}</p>
         <p><b>Price : </b>${{$product['price']}}</p>
         <p>
+          @if(! Cart::get($product['id']))
           <button data-id="{{$product['id']}}" class="btn btn-primary rounded add-to-cart-btn" type="button">ADD TO
             CART</button>
+          @else
+          <button disabled="disabled" class="btn btn-primary rounded add-to-cart-btn" type="button">IN CART</button>
+          @endif
         </p>
       </div>
 

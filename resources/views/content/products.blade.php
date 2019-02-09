@@ -13,7 +13,8 @@
   <div class="container ">
     @foreach($products as $product):
     <div class="card rounded" style="width: 18rem;">
-      <img class="card-img-top" src="{{asset('lib/template/images/' . $product->pimage)}}" alt="{{$product->ptitle}} product image">
+      <img class="card-img-top" src="{{asset('lib/template/images/' . $product->pimage)}}"
+        alt="{{$product->ptitle}} product image">
       <div class="card-body">
         <h5 class="card-title">{{$product->ptitle}}</h5>
         <p class="card-text">{!!$product->particle!!}</p>
@@ -23,9 +24,13 @@
       </ul>
       <div class="card-body">
         <div class="btn-group">
+          @if(! Cart::get($product->id))
           <button data-id="{{$product->id}}" class="card-link btn btn-primary rounded btn-group-sm add-to-cart-btn"
-            type="button">ADD
-            TO CART</button>
+            type="button">ADD TO CART</button>
+          @else <button disabled="disabled" class="card-link btn btn-primary rounded btn-group-sm add-to-cart-btn"
+            type="button">IN
+            CART</button>
+          @endif
           <a href="{{url('shop/'.$product->curl . '/' . $product->purl)}}" class="card-link btn btn-secondary ">Info</a>
         </div>
       </div>
