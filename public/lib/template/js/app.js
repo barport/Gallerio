@@ -1,3 +1,9 @@
+
+String.prototype.permalink = function () {
+  return this.toString().trim().toLowerCase().replace(/\s/g, '-');
+};
+
+
 $('.add-to-cart-btn').on('click', function () {
 
   $.ajax({
@@ -13,4 +19,10 @@ $('.add-to-cart-btn').on('click', function () {
     }
 
   });
+});
+
+$('.origin-text').on('focusout', function () {
+
+
+  $('.target-text').val($(this).val().permalink());
 });

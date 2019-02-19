@@ -14,10 +14,9 @@ class Product extends Model
             ->join('categories AS c', 'c.id', '=', 'p.categorie_id')
             ->select('c.ctitle', 'c.curl', 'p.*', 'p.pimage')
             ->where('c.curl', '=', $curl)
-            ->get()
-            ->toArray();
+            ->paginate(3);
 
-        if (!$products) {
+        if (!$products->count()) {
 
             abort(404);
 

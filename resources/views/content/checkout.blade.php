@@ -66,7 +66,7 @@
 
         <div class="checkout-form-footer">
           <textarea rows="6" class="form-control mb-3" name="message" placeholder="Message" required=""></textarea>
-          <a href="url('thankyou')" class="btn btn-black rectangle"><span>CHECKOUT</span></a>
+          <a href="{{url('thankyou')}}" class="btn btn-black rectangle"><span>CHECKOUT</span></a>
         </div><!-- / checkout-form-footer -->
 
       </div><!-- / checkout-form -->

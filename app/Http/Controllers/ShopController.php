@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Categorie;
+use App\Order;
 use App\Product;
 use Cart;
 use Illuminate\Http\Request;
+use Session;
 
 class ShopController extends MainController
 {
@@ -53,12 +55,28 @@ class ShopController extends MainController
         return redirect('shop/cart');
 
     }
+
     public function checkout()
     {
         self::$data['pageTitle'] .= 'Checkout';
         $cart = Cart::getContent()->toArray();
         self::$data['cart'] = $cart;
         return view('content.checkout', self::$data);
+    }
+
+    public function order()
+    {
+        if (Cart::isEmpty()) {
+            return redirect('shop/cart');
+        } else {
+
+            if (!Session::has('user_id')) {
+                return redirect('user/signin?rn=shop/cart');
+            } else {
+                Order::save_new();
+
+            }
+        }
     }
 
     public function updateCart(Request $request)

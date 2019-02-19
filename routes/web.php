@@ -1,11 +1,16 @@
 <?php
 
-#Pages
+#Cms
 
-Route::get('/', 'PagesController@home');
-Route::get('about', 'PagesController@about');
-Route::get('contact', 'PagesController@contact');
-Route::get('shop', 'PagesController@shop');
+Route::middleware(['cmsguard'])->group(function () {
+
+    Route::prefix('cms')->group(function () {
+        Route::get('dashboard', 'CmsController@dashboard');
+        Route::resource('menu', 'MenuController');
+        Route::resource('content', 'ContentController');
+        Route::resource('categories', 'CategoriesController');
+    });
+});
 
 #Shop
 
@@ -29,3 +34,13 @@ Route::prefix('user')->group(function () {
     Route::post('signup', 'UserController@postSignup');
     Route::get('logout', 'UserController@logout');
 });
+
+#Pages
+
+// Basic Pages
+Route::get('/', 'PagesController@home');
+Route::get('about', 'PagesController@about');
+Route::get('contact', 'PagesController@contact');
+
+// Extra Pages -
+Route::get('{url}', 'PagesController@content');

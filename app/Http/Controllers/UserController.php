@@ -29,7 +29,8 @@ class UserController extends MainController
     {
         if (User::authUser($request['email'], $request['password'])) {
 
-            return redirect('/');
+            $rn = !empty($request['rn']) ? $request['rn'] : '/';
+            return redirect($rn);
         } else {
 
             self::$data['pageTitle'] .= 'Signin Page';

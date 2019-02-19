@@ -26,10 +26,8 @@ class User extends Model
                 if ($user->rid == 6) {
                     Session::put('is_admin', true);
                 }
-                Session::put('user_name', $user->name);
-                Session::put('user_id', $user->id);
-                Session::flash('sm', $user->name . ', Welcome Back!');
-                Session::flash('toastrpos', 'toast-top-center');
+                self::setUserSessions($user, ', Welcome Back!');
+
             }
 
         }
@@ -46,10 +44,16 @@ class User extends Model
         $user->save();
         $uid = $user->id;
         DB::insert("INSERT INTO users_roles VALUES($uid,7)");
+        self::setUserSessions($user, ', You registered successfully');
+
+    }
+
+    private static function setUserSessions($user, $ms)
+    {
         Session::put('user_name', $user->name);
         Session::put('user_id', $user->id);
-        Session::flash('sm', $user->name . ', You registered successfully');
         Session::flash('toastrpos', 'toast-top-center');
+        Session::flash('sm', $user->name . $ms);
     }
 
 }

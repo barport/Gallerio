@@ -9,31 +9,33 @@
       <div class="header-content dark text-center">
         <h1 class="header-title text-white  mb-0">CATEGORIES </h1>
         <p class="inner-space mb-0 text-white">Clean & Elegant Gallery Shop</p>
-      </div><!-- / header-content -->
+      </div>
     </header>
-  </div><!-- / container -->
+  </div>
 
 
-  <div class="container full-width text-center">
+  <div class="container ">
+    <div class="card-group mt-5">
+      @foreach($categories as $categorie):
+      <div class="card">
+        <img src="{{asset('lib/template/images/'. $categorie['cimage'])}}" alt="" class="card-img-top">
+        <div class="card-body">
+          <h4 class="card-title">{{$categorie['ctitle']}}</h4>
+          <p class="card-text">{!!$categorie['carticle']!!}</p>
+          <div class="text-center mb-3">
 
-    <!-- gallery -->
+            <a href="{{url('shop/'. $categorie['curl'])}}" class="btn btn-primary pill">View Products</a>
 
-    @foreach($categories as $categorie):
-    <div class="card col-md-4">
-      <img src="{{asset('lib/template/images/'. $categorie['cimage'])}}" alt="" class="card-img-top">
-      <div class="card-body">
-        <h4 class="card-title">{{$categorie['ctitle']}}</h4>
-        <p class="card-text">{!!$categorie['carticle']!!}</p>
-        <div class="text-center">
-          <br><br>
-          <a href="{{url('shop/'. $categorie['curl'])}}" class="btn btn-primary pill">View Products</a>
+          </div>
         </div>
-      </div><!-- / card-body -->
-    </div><!-- / card -->
-    @endforeach
-  </div><!-- / container -->
+
+      </div>
+      @endforeach
+    </div>
+  </div>
+
 </section>
-<!-- / gallery -->
+
 
 <div class="spacer-2x">&nbsp;</div>
 

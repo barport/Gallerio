@@ -81,7 +81,7 @@
     </div>
     @else
 
-    <p class="pt-5 mt-5 text-center display-2"><i>No Items in Cart.</i></p>
+    <p class="pt-5 mt-5 text-center display-4"><i>No Items in Cart.</i></p>
     <p class="text-center mt-4">
       <a href="{{url('shop')}}" class="btn btn-warning btn-lg">Go Shop </a>
     </p>

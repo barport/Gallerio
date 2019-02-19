@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Content;
+
 class PagesController extends MainController
 {
 
@@ -25,6 +27,13 @@ class PagesController extends MainController
     {
         self::$data['pageTitle'] .= 'Shopping Cart';
         return view('content.cart', self::$data);
+    }
+
+    public function content($url)
+    {
+
+        Content::getAll($url, self::$data);
+        return view('content.content', self::$data);
     }
 
 }
