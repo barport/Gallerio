@@ -118,7 +118,7 @@
         <div class="team block image-block text-center">
           <img src="images/team1.jpg" alt="">
           <div class="team-content inner-space bg-white">
-            <h6 class="box-title">JANE DOE</h6>
+            <h6 class="box-title">BAR PORTNOY</h6>
             <p class="p-2 mb-0 text-sm"><b>CEO & MANAGER</b></p>
             <div class="social-icons">
               <a href="#x" class="btn-social btn-facebook-link p-2"><i class="fab fa-facebook-f"></i></a>
@@ -150,7 +150,7 @@
         <div class="team block image-block text-center">
           <img src="images/team3.jpg" alt="">
           <div class="team-content inner-space bg-white">
-            <h6 class="box-title">LUCY DOE</h6>
+            <h6 class="box-title">BAR PORTNOY</h6>
             <p class="p-2 mb-0 text-sm"><b>DESIGNER</b></p>
             <div class="social-icons">
               <a href="#x" class="btn-social btn-facebook-link p-2"><i class="fab fa-facebook-f"></i></a>
@@ -175,7 +175,7 @@
         <img src="images/creator.jpg" class="testimonial-image circle" alt="">
         <p class="box-description">Quisque tincidunt sodales ante, nec porttitor sem pharetra vitae. Nullam quis dui
           sit amet lectus facilisis iaculis pulvinar vitae.</p>
-        <p class="by-user">- John Doe</p>
+        <p class="by-user">- BAR PORTNOY</p>
       </div><!-- / image-block -->
 
       <div class="block image-block text-center inner-space">
@@ -200,14 +200,14 @@
       </div><!-- / image-block -->
 
       <div class="block image-block text-center inner-space">
-        <img src="images/creator.jpg" class="testimonial-image circle" alt="">
+        <img src="/public/lib/template/images/client1.jpgf" class="testimonial-image circle" alt="">
         <p class="box-description">Quisque tincidunt sodales ante, nec porttitor sem pharetra vitae. Nullam quis dui
           sit amet lectus facilisis iaculis pulvinar vitae.</p>
         <p class="by-user">- James Doe</p>
       </div><!-- / image-block -->
 
       <div class="block image-block text-center inner-space">
-        <img src="images/creator3.jpg" class="testimonial-image circle" alt="">
+        <img src="lib/template/images/illustration1.jpg" class="testimonial-image circle" alt="">
         <p class="box-description">Quisque tincidunt sodales ante, nec porttitor sem pharetra vitae. Nullam quis dui
           sit amet lectus facilisis iaculis pulvinar vitae.</p>
         <p class="by-user">- Amanda Doe</p>

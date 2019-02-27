@@ -32,7 +32,8 @@
     <tbody>
       @foreach($cart as $item)
       <tr class="cart-item">
-        <td class="image"><img src="{{asset('lib/template/images/illustration1.jpg')}}" alt=""></td>
+        <td class="image"><img src="{{asset('lib/template/images/'.$item['attributes']['image'])}}" alt="">
+        </td>
         <td><a href="#x"><b>{{$item['name']}}</b></a></td>
         <td class="text-center">
           <a href="{{url('shop/update-cart?pid=' . $item['id'] . '&op=minus')}}" class="update-cart"> <i
@@ -68,7 +69,7 @@
 <div class="container mb-3 pb-3">
 
   <div class="col-md-3 float-right">
-    <a href="{{url('shop/checkout')}}" class="btn btn-success rectangle mt-1 mb-1"><i class="lnr lnr-exit"></i> <span>
+    <a href="{{url('shop/order')}}" class="btn btn-success rectangle mt-1 mb-1"><i class="lnr lnr-exit"></i> <span>
         ORDER NOW
       </span></a>
   </div><!-- / cart-checkout -->

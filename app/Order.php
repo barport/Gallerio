@@ -3,6 +3,7 @@
 namespace App;
 
 use Cart;
+use DB;
 use Illuminate\Database\Eloquent\Model;
 use Session;
 
@@ -18,6 +19,16 @@ class Order extends Model
         $order->save();
         Session::flash('sm', 'Your order saved successfuly');
         Cart::clear();
+    }
+
+    public static function getAll()
+    {
+        return DB::table('orders AS o')
+            ->join('users AS u', 'u.id', '=', 'o.user_id')
+            ->select('u.name', 'o.*')
+            ->orderBy('o.created_at', 'desc')
+            ->get()
+            ->toArray();
     }
 
 }

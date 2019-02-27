@@ -59,4 +59,9 @@ class UserController extends MainController
         return redirect('user/signin');
     }
 
+    public function userProfile()
+    {
+        return view('content.profile', self::$data);
+    }
+
 }

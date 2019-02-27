@@ -1,4 +1,4 @@
-<div class="top-menu top-menu-primary">
+<div class="top-menu top-menu-primary p-4 fixed-top ">
   <div class="container">
     <p>
       <span class="social margin-fix left">
@@ -30,7 +30,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white custom-menu split-menu">
 
 
-  <div class="container">
+  <div class="container mt-5 pt-3">
     <a class="navbar-brand m-auto" href="{{url('./')}}"><img src="lib/template/images/logo-icon.png" alt=""></a><br>
     <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-toggle-1"
       aria-controls="navbar-toggle-1" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,14 +42,6 @@
 
     <a class="navbar-brand mobile-brand m-auto" href="#x"><img src="lib/template/images/logo-icon.png" alt=""></a>
 
-    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-toggle-2"
-      aria-controls="navbar-toggle-2" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="icon-bar top-bar"></span>
-      <span class="icon-bar middle-bar"></span>
-      <span class="icon-bar bottom-bar"></span>
-      <span class="sr-only">Toggle navigation</span>
-    </button><!-- / navbar-toggler -->
-
     <div class="collapse navbar-collapse" id="navbar-toggle-1">
       <ul class="navbar-nav mr-auto">
 
@@ -60,12 +52,24 @@
           <a class="nav-link " href="{{url('about')}}"><i class="fas fa-info-circle"></i> About Us</a>
         </li>
 
-        <li class="nav-item after-dropdown">
-          <a class="nav-link " href="{{url('shop')}}"><i class="fas fa-shopping-bag"></i> Shop</a>
+        <li class="nav-item dropdown extra-dropdowns">
+          <a class="nav-link has-dropdown-toggle dropdown-toggle" href="{{url('shop')}}"><i
+              class="fas fa-shopping-bag"></i> Shop</a>
+
+          @foreach($categories as $categorie)
+
+          <div class="dropdown-menu animated fadeIn fast" aria-labelledby="dropdown3">
+            <div class="cart-small text-center">
+              <img src="{{asset('lib/template/images/'. $categorie['cimage'])}}" alt="">
+              <p><a href="{{url('shop/'. $categorie['curl'])}}" class="text-black">{{$categorie['ctitle']}}</a></p>
+            </div>
+            @endforeach
+
         </li>
         @foreach($menu as $item)
         <li class="nav-item after-dropdown">
-          <a class="nav-link " href="{{url($item['url'])}}">{{$item['link']}}</a>
+          <a class="nav-link " href="{{url($item['url'])}}" id="dropdown3" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">{{$item['link']}}</a>
         </li>
         @endforeach
       </ul><!-- / navbar-nav -->
@@ -90,7 +94,7 @@
 
           <div class="dropdown-menu animated fadeIn fast" aria-labelledby="dropdown3">
             <div class="cart-small">
-              <img src="{{asset('lib/template/images/camshot6')}}" alt="">
+              <img src="{{asset('lib/template/images/'.$item['attributes']['image'])}}" alt="">
               <p><a href="#x" class="text-black">{{$item['name']}}</a> <br> <span>{{$item['price']}}</span></p>
               <a href="{{url('shop/remove-item?pid=' . $item['id'])}}"> <i class="md-icon dp14 close-icon">close</i></a>
             </div><!-- / cart-small -->

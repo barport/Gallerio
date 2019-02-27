@@ -74,7 +74,8 @@ class ShopController extends MainController
                 return redirect('user/signin?rn=shop/cart');
             } else {
                 Order::save_new();
-
+                self::$data['pageTitle'] .= 'Thank You';
+                return view('content.thankyou', self::$data);
             }
         }
     }

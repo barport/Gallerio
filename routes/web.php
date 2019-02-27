@@ -9,6 +9,8 @@ Route::middleware(['cmsguard'])->group(function () {
         Route::resource('menu', 'MenuController');
         Route::resource('content', 'ContentController');
         Route::resource('categories', 'CategoriesController');
+        Route::resource('products', 'ProductsController');
+        Route::get('orders', 'CmsController@orders');
     });
 });
 
@@ -20,7 +22,7 @@ Route::prefix('shop')->group(function () {
     Route::get('update-cart', 'ShopController@updateCart');
     Route::get('clear-cart', 'ShopController@clearCart');
     Route::get('cart', 'ShopController@cart');
-    Route::get('checkout', 'ShopController@checkout');
+    Route::get('order', 'ShopController@order');
     Route::get('add-to-cart', 'ShopController@addToCart');
     Route::get('{curl}', 'ShopController@products');
     Route::get('{curl}/{purl}', 'ShopController@item');
@@ -28,6 +30,7 @@ Route::prefix('shop')->group(function () {
 #User
 
 Route::prefix('user')->group(function () {
+    Route::get('profile', 'UserController@userProfile');
     Route::get('signin', 'UserController@getSignin');
     Route::post('signin', 'UserController@postSignin');
     Route::get('signup', 'UserController@getSignup');

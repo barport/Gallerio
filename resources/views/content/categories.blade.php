@@ -14,23 +14,26 @@
   </div>
 
 
-  <div class="container ">
-    <div class="card-group mt-5">
-      @foreach($categories as $categorie):
-      <div class="card">
-        <img src="{{asset('lib/template/images/'. $categorie['cimage'])}}" alt="" class="card-img-top">
-        <div class="card-body">
-          <h4 class="card-title">{{$categorie['ctitle']}}</h4>
-          <p class="card-text">{!!$categorie['carticle']!!}</p>
-          <div class="text-center mb-3">
+  <div class="container mt-4 pt-4 m-auto ">
 
-            <a href="{{url('shop/'. $categorie['curl'])}}" class="btn btn-primary pill">View Products</a>
+
+    <div class=" m-auto  card-rows row mt-5">
+      @foreach($categories as $categorie):
+      <a href="{{url('shop/'. $categorie['curl'])}}">
+
+        <div class="card position-relative ml-4 " style="width: 40rem;">
+          <img src="{{asset('lib/template/images/'. $categorie['cimage'])}}" alt="" class="card-img-top">
+          <div class="card-body">
+            <h4 class="card-title">{{$categorie['ctitle']}}</h4>
+            <p class="card-text">{!!$categorie['carticle']!!}</p>
 
           </div>
-        </div>
 
-      </div>
+
+        </div>
+      </a>
       @endforeach
+
     </div>
   </div>
 

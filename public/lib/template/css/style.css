@@ -4224,6 +4224,9 @@ header.about-header {
 header.shop-header {
   background-image: url(../images/shop-header.jpg);
 }
+header.thankyou-header {
+  background-image: url(../images/client1.jpg);
+}
 
 header.post-header {
   background-image: url(../images/post-header.jpg);
@@ -5608,5 +5611,6 @@ table > thead > tr > th, table > thead > tr > td, table > tbody > tr > th, table
     padding-left: 7.5px;
   }
 }
+
 /*--- end of min-widths ---*/
 /*------- end of media screens -------*/

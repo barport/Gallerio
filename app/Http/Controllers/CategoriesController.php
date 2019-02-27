@@ -29,25 +29,25 @@ class CategoriesController extends MainController
     public function show($id)
     {
         self::$data['item_id'] = $id;
-        return view('cms.delete_menu', self::$data);
+        return view('cms.delete_category', self::$data);
     }
 
     public function edit($id)
     {
-        self::$data['item'] = Menu::find($id)->toArray();
-        return view('cms.edit_menu', self::$data);
+        self::$data['item'] = Categorie::find($id)->toArray();
+        return view('cms.edit_category', self::$data);
 
     }
 
-    public function update(MenuRequest $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        Menu::update_item($request, $id);
-        return redirect('cms/menu');
+        Categorie::update_item($request, $id);
+        return redirect('cms/categories');
     }
 
     public function destroy($id)
     {
-        Menu::destroy($id);
+        Categorie::destroy($id);
         Session::flash('sm', 'Category deleted successfuly');
         return redirect('cms/categories');
     }

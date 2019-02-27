@@ -13,7 +13,7 @@
   <div class="col-md-4 bg-secondary rounded">
 
     <form action="{{url('cms/menu/'. $item['id'])}}" method="POST" autocomplete="off" novalidate="novalidate">
-      <input type="hidden" name="item_id" value="$item['id']">
+      <input type="hidden" name="item_id" value="{{$item['id']}}">
       @csrf
       {{method_field('PUT')}}
       <div class="form-group font-weight-bold ">

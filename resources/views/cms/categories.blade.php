@@ -22,12 +22,12 @@
         @foreach($categories as $item)
         <tr class="h5">
           <td class="pt-4 font-weight-bold">{{$item['ctitle']}}</td>
-          <td><img width=" 120" src="{{asset('lib/template/images/'.$item['cimage'])}}"></td>
+          <td><img width=" 300" src="{{asset('lib/template/images/'.$item['cimage'])}}"></td>
           <td>{{date('d/M/Y',strtotime($item['updated_at']))}}</td>
           <td>
-            <a class="mr-2" href="{{url('cms/cateogries/'.$item['id'] . '/edit')}}"> <i class="fas fa-pencil-alt"></i>
+            <a class="mr-2" href="{{url('cms/categories/'.$item['id'] . '/edit')}}"> <i class="fas fa-pencil-alt"></i>
               Edit</a> |
-            <a class="ml-2" href="{{url('cms/Categories/'. $item['id'])}}"> <i class="fas fa-trash-alt"></i> Delete</a>
+            <a class="ml-2" href="{{url('cms/categories/'. $item['id'])}}"> <i class="fas fa-trash-alt"></i> Delete</a>
           </td>
         </tr>
         @endforeach

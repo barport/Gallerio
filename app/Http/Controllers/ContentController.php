@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Content;
 use App\Http\Requests\ContentRequest;
-use App\Menu;
 use Session;
 
 class ContentController extends MainController
@@ -48,7 +47,7 @@ class ContentController extends MainController
 
     public function destroy($id)
     {
-        Menu::destroy($id);
+        Content::destroy($id);
         Session::flash('sm', 'Item deleted successfuly');
         return redirect('cms/content');
     }

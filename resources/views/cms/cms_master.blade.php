@@ -56,7 +56,7 @@
               <a class="nav-link bg-primary text-white border-bottom p-3" href="{{url('cms/products')}}">Products </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link bg-dark text-white border-bottom p-3" href="{{url('cms/Orders')}}"><i
+              <a class="nav-link bg-dark text-white border-bottom p-3" href="{{url('cms/orders')}}"><i
                   class="fas fa-list-ul"></i> Orders </a>
             </li>
           </ul>
@@ -68,7 +68,6 @@
       </nav>
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4 mt-5">
 
-        @yield('main_cms_content')
         @if( $errors->any())
 
         <div class="row">
@@ -84,18 +83,35 @@
           </div>
         </div>
         @endif
+        @yield('main_cms_content')
 
       </main>
     </div>
   </div>
-  @include('inc.js_footer')
+  <script src="{{asset('lib/template/js/jquery.min.js')}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="{{asset('lib/template/js/bootstrap.min.js')}}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+  <script src="{{asset('lib/template/js/app.js')}}"></script>
   <script>
     $('#article').summernote({
       height: 300
 
     });
   </script>
+  @if(Session::has('sm'))
+  <script>
+    @if (Session:: has('toastrpos'));
+    toastr.options.positionClass = "{{Session::get('toastrpos')}}";
+    @else
+    toastr.options.positionClass = "toast-bottom-center";
+    @endif
+    toastr.success("{{Session::get('sm')}}");
+  </script>
+  @endif
 </body>
 
 </html>

@@ -5,7 +5,8 @@
   <div class="row mt-5 mb-5 ">
     <div class="col-12">
       <div class="col-4 float-left">
-        <p><img width="250" height="300" src="{{asset('lib/template/images/' . $product['pimage'])}}" alt="{{$product['ptitle']}} product image"></p>
+        <p><img width="500" src="{{asset('lib/template/images/' . $product['pimage'])}}"
+            alt="{{$product['ptitle']}} product image"></p>
 
       </div>
       <div class="col-6 float-right mt-5">

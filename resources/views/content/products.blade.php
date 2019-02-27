@@ -7,12 +7,13 @@
   <div class="container ">
     <h1 class=" text-center text-regular display-2">{{$products[0]->ctitle}}</h2>
   </div>
+  <div class="spacer spacer-line border-primary">&nbsp;</div>
   <div class="container ">
     <div class="row justify-content-center mt-5">
       @foreach($products as $product):
-      <div class="col-sm-3">
+      <div class="col-sm-3 card-group">
 
-        <div class="card rounded" style="width: 18rem;">
+        <div class="card rounded mt-3 ml-3" style="width: 22rem; ">
           <img class="card-img-top" src="{{asset('lib/template/images/' . $product->pimage)}}"
             alt="{{$product->ptitle}} product image">
           <div class="card-body">
@@ -22,7 +23,7 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item h3">Price : ${!!$product->price!!} </li>
           </ul>
-          <div class="card-body">
+          <div class="card-footer">
             <div class="btn-group">
               @if(! Cart::get($product->id))
               <button data-id="{{$product->id}}" class="card-link btn btn-primary rounded btn-group-sm add-to-cart-btn"

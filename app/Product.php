@@ -5,6 +5,8 @@ namespace App;
 use Cart;
 use DB;
 use Illuminate\Database\Eloquent\Model;
+use Image;
+use Session;
 
 class Product extends Model
 {
@@ -14,7 +16,7 @@ class Product extends Model
             ->join('categories AS c', 'c.id', '=', 'p.categorie_id')
             ->select('c.ctitle', 'c.curl', 'p.*', 'p.pimage')
             ->where('c.curl', '=', $curl)
-            ->paginate(3);
+            ->paginate(6);
 
         if (!$products->count()) {
 
@@ -47,7 +49,9 @@ class Product extends Model
 
             if (!Cart::get($pid)) {
 
-                Cart::add($pid, $product['ptitle'], $product['price'], 1, []);
+                Cart::add($pid, $product['ptitle'], $product['price'], 1, ['image' => $product['pimage']]);
+                Session::flash('sm','"'. $product['ptitle'] .'"'. ' was added to cart!');
+                
             }
         }
 
@@ -70,5 +74,62 @@ class Product extends Model
                 }
             }
         }
+    }
+
+    public static function save_new($request)
+    {
+
+        $image_name = 'default.png';
+
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+
+            $file = $request->file('image');
+            $image_name = date('d.m.Y.H.i.s') . '-' . $file->getClientOriginalName();
+            $request->file('image')->move(public_path() . '/lib/template/images', $image_name);
+            $img = Image::make(public_path() . '/lib/template/images/' . $image_name);
+            $img->resize(300, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save();
+
+        }
+        $product = new self();
+        $product->categorie_id = $request['categorie_id'];
+        $product->ptitle = $request['title'];
+        $product->particle = $request['article'];
+        $product->pimage = $image_name;
+        $product->price = $request['price'];
+        $product->purl = $request['url'];
+        $product->save();
+        Session::flash('sm', 'Product Created Successfully');
+    }
+    public static function update_item($request, $id)
+    {
+
+        $image_name = '';
+
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+
+            $file = $request->file('image');
+            $image_name = date('d.m.Y.H.i.s') . '-' . $file->getClientOriginalName();
+            $request->file('image')->move(public_path() . '/lib/template/images', $image_name);
+            $img = Image::make(public_path() . '/lib/template/images/' . $image_name);
+            $img->resize(300, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+            $img->save();
+
+        }
+        $product = self::find($id);
+        $product->categorie_id = $request['categorie_id'];
+        $product->ptitle = $request['title'];
+        $product->particle = $request['article'];
+        if (!$image_name) {
+            $product->pimage = $image_name;
+        }
+        $product->price = $request['price'];
+        $product->purl = $request['url'];
+        $product->save();
+        Session::flash('sm', 'Product Updated Successfully');
     }
 }
