@@ -46,12 +46,10 @@
   </div>
   </div><!-- / container -->
   <div class="container">
-    <div class="row ">
-      <nav aria-label="pagination-center">
-        <div class="pagination justify-content-center">
-          {{$products->links()}}
-        </div>
-      </nav>
+    <div class="row">
+      <div class="col-6 m-auto">
+        {{$products->links()}}
+      </div>
     </div>
   </div>
   </div>

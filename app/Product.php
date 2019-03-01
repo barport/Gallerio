@@ -50,8 +50,8 @@ class Product extends Model
             if (!Cart::get($pid)) {
 
                 Cart::add($pid, $product['ptitle'], $product['price'], 1, ['image' => $product['pimage']]);
-                Session::flash('sm','"'. $product['ptitle'] .'"'. ' was added to cart!');
-                
+                Session::flash('sm', '"' . $product['ptitle'] . '"' . ' was added to cart!');
+
             }
         }
 
@@ -124,7 +124,7 @@ class Product extends Model
         $product->categorie_id = $request['categorie_id'];
         $product->ptitle = $request['title'];
         $product->particle = $request['article'];
-        if (!$image_name) {
+        if ($image_name) {
             $product->pimage = $image_name;
         }
         $product->price = $request['price'];
